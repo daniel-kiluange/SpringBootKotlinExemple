@@ -19,7 +19,7 @@ class BookController {
 
     @GetMapping("/book/{id}")
     fun getBook(@PathVariable("id") id: Int): Book {
-        logger.debug("Fetch book id {}", id)
+        logger.info("Fetch book id {}", id)
         return bookService.getById(id)
     }
 

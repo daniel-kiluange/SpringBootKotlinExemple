@@ -4,6 +4,7 @@ import br.com.kiluange.springrestapiexemple.data.domain.Book
 import br.com.kiluange.springrestapiexemple.exception.NoSuchItemException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.slf4j.MDC
 import org.springframework.stereotype.Service
 
 @Service
@@ -13,6 +14,7 @@ class BookService : BaseService<Book, Int> {
     val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
     override fun getById(id: Int): Book {
+        logger.info("Service {}",MDC.get("x-tid"))
         return listOfBooks.find { book -> book.id == id }
             ?: throw NoSuchItemException().also { logger.info("Can't find book id {}", id, it) }
     }
